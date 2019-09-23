@@ -1,7 +1,7 @@
 # PROJEJKTIDEE
 ## chaosbox
-In Form einer WebApp, basierend auf Python und Flask wird ein einfaches Lagerverwaltungs-Tool entwickelt.
-Dies mit dem Ziel ein kleines Lager, dies kann Privat oder auch von einem kleineren Unternehmen oder einem Verein o.Ä. mit einem geringen Aufwand zu managen. Es wird gewisse Abstriche geben im Vergleich zu grösseren Lager-Management-Lösungen, da es um die Einfachheit geht und easy to use sein sollte.
+chaosbox ist eine warehouse management Lösung in Form einer WebApp welche auf auf Python und Flask basiert. 
+Das Ziel ist, dass damit ein kleines Lager, dies kann Privat oder auch von einem kleineren Unternehmen oder einem Verein o.Ä. mit einem geringen Aufwand gemanaged werden kann. Es wird gewisse Abstriche geben im Vergleich zu grösseren warehouse management Lösungen, da es um die Einfachheit geht und easy to use sein sollte.
 
 ## Anforderungen
 * Lagerboxen hinzufügen, anzeigen, ändern, löschen
