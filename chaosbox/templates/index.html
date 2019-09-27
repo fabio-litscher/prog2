@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8">
+		<title>chaosbox</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
+	</head>
+	<body>
+		<header>
+			<h1>chaosbox</h1>
+</header>
+		<main>
+			<h1>Suche</h1>
+			<p>Liste aller Boxen mit Suche und Filter (nach Boxen und Items)</p>
+
+			<form id="search-form" name="search-form" method="get">
+				<input type="text" name="search-query" placeholder="Suchbegriff" />
+
+				<input type="checkbox" id="search-boxes" name="search-boxes" />
+				<label for="search-boxes">Nach Box suchen</label>
+
+				<input type="checkbox" id="search-items" name="search-items" />
+				<label for="search-items">Nach Item suchen</label>
+
+				<input type="submit" name="execute-search" value="search" />
+			</form>
+
+			<section>
+				<h1>Ergebnisse</h1>
+
+				<div>
+					<a href="{{ url_for('details')}}">show details</a>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>
