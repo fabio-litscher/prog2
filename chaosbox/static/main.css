@@ -6,7 +6,6 @@ html, body {
 
 header {
 	height: 75px;
-	width: 100%;
 	display: flex;
 	align-items: center;
 	padding-left: 20px;

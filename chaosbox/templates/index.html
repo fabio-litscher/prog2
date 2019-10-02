@@ -14,6 +14,10 @@
 			<h1>Suche</h1>
 			<p>Liste aller Boxen mit Suche und Filter (nach Boxen und Items)</p>
 
+
+			<a href="{{ url_for('createBox')}}">Create box</a>
+			<a href="{{ url_for('createItem')}}">Create item</a>
+
 			<form id="search-form" name="search-form" method="get">
 				<input type="text" name="search-query" placeholder="Suchbegriff" />
 
@@ -30,7 +34,8 @@
 				<h1>Ergebnisse</h1>
 
 				<div>
-					<a href="{{ url_for('details')}}">show details</a>
+					<a href="{{ url_for('boxDetails')}}">show box details</a>
+					<a href="{{ url_for('itemDetails')}}">show item details</a>
 				</div>
 			</section>
 		</main>
