@@ -1,1 +1,22 @@
+{% include "html_head.html" %}
+
+	<body>
+		{% include "header_nav.html" %}
 <a href="{{ url_for('home')}}">back to list</a>
+
+
+{% if box_id %}
+	<h2>Box Details</h2>
+	<h4>ID: {{ box_id }}</h4>
+	<h4>Name: {{ box['box_name'] }}</h4>
+	<h4>Description: {{ box['box_description'] }}</h4>
+{% else %}
+	<form method="post">
+		<input type="text" name="box_name" placeholder="box name" />
+		<br />
+		<textarea name="box_description" placeholder="box description"></textarea>
+		<br />
+		<input type="submit" name="box_save" value="save">
+	</form>
+{% endif %}
+</body>

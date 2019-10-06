@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html lang="de">
-	<head>
-		<meta charset="utf-8">
-		<title>chaosbox</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+{% include "html_head.html" %}
 
-	</head>
 	<body>
-		<header>
-			<h1>chaosbox</h1>
-</header>
+		{% include "header_nav.html" %}
 		<main>
 			<h1>Suche</h1>
 			<p>Liste aller Boxen mit Suche und Filter (nach Boxen und Items)</p>
 
 
-			<a href="{{ url_for('createBox')}}">Create box</a>
+			<a href="{{ url_for('createBox', box_id=None)}}">Create box</a>
 			<a href="{{ url_for('createItem')}}">Create item</a>
 
 			<form id="search-form" name="search-form" method="get">
@@ -33,10 +25,22 @@
 			<section>
 				<h1>Ergebnisse</h1>
 
+				{% if boxes %}
+
+				{% for box, data in boxes.items() %}
+					<a href="{{ url_for('createBox', box_id=box) }}">Box-Nr.: {{ box }}, Name: {{ data["box_name"] }}</a><br />
+				{% endfor %}
+
+				{% else %}
+					<h3>No boxes.</h3>
+				{% endif %}
+
+				<!--<br />
+				<br />
 				<div>
 					<a href="{{ url_for('boxDetails')}}">show box details</a>
 					<a href="{{ url_for('itemDetails')}}">show item details</a>
-				</div>
+				</div>-->
 			</section>
 		</main>
 	</body>
