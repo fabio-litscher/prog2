@@ -7,8 +7,8 @@
 			<p>Liste aller Boxen mit Suche und Filter (nach Boxen und Items)</p>
 
 
-			<a href="{{ url_for('createBox', box_id=None)}}">Create box</a>
-			<a href="{{ url_for('createItem')}}">Create item</a>
+			<a href="{{ url_for('box', box_id=None)}}">create box</a>
+			<!--<a href="{{ url_for('item')}}">Create item</a>-->
 
 			<form id="search-form" name="search-form" method="get">
 				<input type="text" name="search-query" placeholder="Suchbegriff" />
@@ -22,13 +22,14 @@
 				<input type="submit" name="execute-search" value="search" />
 			</form>
 
+
 			<section>
 				<h1>Ergebnisse</h1>
 
 				{% if boxes %}
 
 				{% for box, data in boxes.items() %}
-					<a href="{{ url_for('createBox', box_id=box) }}">Box-Nr.: {{ box }}, Name: {{ data["box_name"] }}</a><br />
+					<a href="{{ url_for('box', box_id=box) }}">Box-Nr.: {{ box }}, Name: {{ data["box_name"] }}</a><br />
 				{% endfor %}
 
 				{% else %}
@@ -38,8 +39,8 @@
 				<!--<br />
 				<br />
 				<div>
-					<a href="{{ url_for('boxDetails')}}">show box details</a>
-					<a href="{{ url_for('itemDetails')}}">show item details</a>
+					<a href="{{ url_for('box')}}">show box details</a>
+					<a href="{{ url_for('item')}}">show item details</a>
 				</div>-->
 			</section>
 		</main>
