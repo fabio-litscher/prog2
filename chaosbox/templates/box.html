@@ -14,13 +14,13 @@
 			<h4>Name: {{ box['box_name'] }}</h4>
 			<h4>Description: {{ box['box_description'] }}</h4>
 
-			<a href="{{ url_for('item', origin=box_id)}}">create item</a>
+			<a href="{{ url_for('item', box_id=box_id)}}">create item</a>
 			<h2>Items</h2>
 			{% for item, data in box['box_items'].items() %}
-				<h4>{{ item }}:</h4>
+				<a href="{{ url_for('item', box_id=box_id, item_id=item) }}">item {{ item }}:</a><br />
 				<span>{{ data['item_name'] }}</span><br />
 				<span>{{ data['item_description'] }}</span><br />
-				<span>{{ data['item_quantity'] }}</span><br />
+				<span>{{ data['item_quantity'] }}</span><br /><br />
 			{% endfor %}
 
 		{% else %}

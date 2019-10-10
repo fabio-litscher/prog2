@@ -47,15 +47,22 @@ def box(box_id=None):
     return render_template('box.html')
 
 
-@app.route('/item')
-@app.route('/item/<origin>')
-def item(origin=None):
-    return render_template('item.html', origin=origin)
+@app.route('/box/<box_id>/item', methods=['GET', 'POST'])
+@app.route('/box/<box_id>/item/<item_id>', methods=['GET', 'POST'])
+def item(box_id=None, item_id=None):
+    # post request from adding new item
 
+    # show existing item
+    if(item_id):
+        item = boxes[box_id]['box_items'][item_id]
+        item_name = boxes[box_id]['box_items'][item_id]['item_name']
+        item_description = boxes[box_id]['box_items'][item_id]['item_description']
+        item_quantity = boxes[box_id]['box_items'][item_id]['item_quantity']
+        return render_template('item.html', box_id=box_id, item_id=item_id, item=item)
 
-'''@app.route("/test")
-def test():
-    return render_template('test.html', name="Fabio")'''
+    # when going to create a new item (empty item page)
+    return render_template('item.html', box_id=box_id)
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

@@ -2,7 +2,7 @@
 <body>
 	{% include "header_nav.html" %}
 	<main>
-		<a href="{{ url_for('box', box_id=origin) }}">back to box</a>
+		<a href="{{ url_for('box', box_id=box_id) }}">back to box</a>
 		{% if item_id %}
 			<h2>Item Details</h2>
 

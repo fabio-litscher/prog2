@@ -8,7 +8,6 @@
 
 
 			<a href="{{ url_for('box', box_id=None)}}">create box</a>
-			<!--<a href="{{ url_for('item')}}">Create item</a>-->
 
 			<form id="search-form" name="search-form" method="get">
 				<input type="text" name="search-query" placeholder="Suchbegriff" />
@@ -25,23 +24,21 @@
 
 			<section>
 				<h1>Ergebnisse</h1>
+					<ul class="default-list">
+					{% if boxes %}
 
-				{% if boxes %}
+					{% for box, data in boxes.items() %}
+						<li>
+							<a href="{{ url_for('box', box_id=box) }}">Box-Nr.: {{ box }}, Name: {{ data["box_name"] }}</a>
+						</li>
+					{% endfor %}
 
-				{% for box, data in boxes.items() %}
-					<a href="{{ url_for('box', box_id=box) }}">Box-Nr.: {{ box }}, Name: {{ data["box_name"] }}</a><br />
-				{% endfor %}
-
-				{% else %}
-					<h3>No boxes.</h3>
-				{% endif %}
-
-				<!--<br />
-				<br />
-				<div>
-					<a href="{{ url_for('box')}}">show box details</a>
-					<a href="{{ url_for('item')}}">show item details</a>
-				</div>-->
+					{% else %}
+						<li>
+							<h3>No boxes.</h3>
+						</li>
+					{% endif %}
+					</ul>
 			</section>
 		</main>
 	</body>
