@@ -34,7 +34,8 @@ def box(box_id=None):
         box_description = request.form['box_description']
         boxes[box_id] = {
             'box_name': box_name,
-            'box_description': box_description
+            'box_description': box_description,
+            'box_items': {}
         }
 
         return redirect(url_for('home'))
@@ -57,7 +58,11 @@ def item(box_id=None, item_id=None):
 
         # add box to boxes
         key_list = list(boxes[box_id]['box_items'].keys())
-        next_key = str(int(key_list[-1])+1)
+        if len(key_list) != 0:
+            next_key = str(int(key_list[-1])+1)
+        else:
+            next_key = '0'
+        
         item_name = request.form['item_name']
         item_description = request.form['item_description']
         item_quantity = request.form['item_quantity']

@@ -7,7 +7,7 @@
 		{% if box_id %}
 			<h2>Box Details</h2>
 
-			<a href="">edit box informations</a> | 
+			<a href="">edit box informations</a> |	 
 			<a href="">delete box with all items</a>
 
 			<h4>ID: {{ box_id }}</h4>
@@ -16,12 +16,14 @@
 
 			<a href="{{ url_for('item', box_id=box_id)}}">create item</a>
 			<h2>Items</h2>
+			{% if box['box_items'] %}
 			{% for item, data in box['box_items'].items() %}
 				<a href="{{ url_for('item', box_id=box_id, item_id=item) }}">item {{ item }}:</a><br />
 				<span>{{ data['item_name'] }}</span><br />
 				<span>{{ data['item_description'] }}</span><br />
 				<span>{{ data['item_quantity'] }}</span><br /><br />
 			{% endfor %}
+			{% endif %}
 
 		{% else %}
 			<form method="post">

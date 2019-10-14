@@ -3,26 +3,27 @@
 	<body>
 		{% include "header_nav.html" %}
 		<main>
-			<h1>Suche</h1>
-			<p>Liste aller Boxen mit Suche und Filter (nach Boxen und Items)</p>
+			<section>
+				<h1>Suche</h1>
+				<p>Liste aller Boxen mit Suche und Filter (nach Boxen und Items)</p>
 
-
-			<a href="{{ url_for('box', box_id=None)}}">create box</a>
-
-			<form id="search-form" name="search-form" method="get">
-				<input type="text" name="search-query" placeholder="Suchbegriff" />
-
-				<input type="checkbox" id="search-boxes" name="search-boxes" />
-				<label for="search-boxes">Nach Box suchen</label>
-
-				<input type="checkbox" id="search-items" name="search-items" />
-				<label for="search-items">Nach Item suchen</label>
-
-				<input type="submit" name="execute-search" value="search" />
-			</form>
-
+				<a class="
+				btn-default" href="{{ url_for('box', box_id=None)}}">create box</a>
+			</section>
 
 			<section>
+				<form id="search-form" name="search-form" method="get">
+					<input type="text" name="search-query" placeholder="Suchbegriff" />
+
+					<input type="checkbox" id="search-boxes" name="search-boxes" />
+					<label for="search-boxes">Nach Box suchen</label>
+
+					<input type="checkbox" id="search-items" name="search-items" />
+					<label for="search-items">Nach Item suchen</label>
+
+					<input type="submit" name="execute-search" value="search" />
+				</form>
+
 				<h1>Ergebnisse</h1>
 					<ul class="default-list">
 					{% if boxes %}
