@@ -3,12 +3,14 @@ from flask import render_template
 from flask import request
 from flask import redirect
 from flask import url_for
+# from collections import OrderedDict
 import time
 from libs import data
 
 app = Flask("chaosbox")
 
 # initialize boxes
+# boxes = OrderedDict()
 boxes = {}
 
 # get dummy data
@@ -51,6 +53,21 @@ def box(box_id=None):
 @app.route('/box/<box_id>/item/<item_id>', methods=['GET', 'POST'])
 def item(box_id=None, item_id=None):
     # post request from adding new item
+    if request.method == 'POST':
+
+        # add box to boxes
+        key_list = list(boxes[box_id]['box_items'].keys())
+        next_key = str(int(key_list[-1])+1)
+        item_name = request.form['item_name']
+        item_description = request.form['item_description']
+        item_quantity = request.form['item_quantity']
+        boxes[box_id]['box_items'][next_key] = {
+            'item_name': item_name,
+            'item_description': item_description,
+            'item_quantity': item_quantity
+        }
+
+        return redirect(url_for('box', box_id=box_id))
 
     # show existing item
     if(item_id):
