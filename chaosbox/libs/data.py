@@ -4,11 +4,11 @@ import json
 def load_json(json_path):
     try:
         with open(json_path) as open_file:
-            user_data = json.load(open_file)
+            boxes = json.load(open_file)
     except FileNotFoundError:
-        user_data = {}
+        boxes = {}
 
-    return user_data
+    return boxes
 
 
 def save_json(json_path, data):

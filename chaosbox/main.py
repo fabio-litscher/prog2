@@ -22,7 +22,8 @@ data_storage_file = data_path / "chaosbox.json"
 boxes = {}
 
 # get dummy data
-boxes = data.create_dummy_data()
+boxes = data.load_json(data_storage_file)
+#boxes = data.create_dummy_data()
 
 
 @app.route('/')
