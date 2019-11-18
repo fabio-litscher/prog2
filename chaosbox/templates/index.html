@@ -28,11 +28,11 @@
 					<ul class="default-list">
 					{% if boxes %}
 
-					{% for box, data in boxes.items() %}
-						<li>
-							<a href="{{ url_for('box', box_id=box) }}">Box-Nr.: {{ box }}, Name: {{ data["box_name"] }}</a>
-						</li>
-					{% endfor %}
+						{% for box, data in boxes.items() %}
+							<li>
+								<a href="{{ url_for('box', box_id=box) }}">Box-Nr.: {{ box }}, Name: {{ data["box_name"] }}</a>
+							</li>
+						{% endfor %}
 
 					{% else %}
 						<li>

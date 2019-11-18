@@ -1,3 +1,21 @@
+import json
+
+
+def load_json(json_path):
+    try:
+        with open(json_path) as open_file:
+            user_data = json.load(open_file)
+    except FileNotFoundError:
+        user_data = {}
+
+    return user_data
+
+
+def save_json(json_path, data):
+    with open(json_path, "w+", encoding="utf-8") as open_file:
+        json.dump(data, open_file, indent=4)
+
+
 def create_dummy_data():
     boxes = {
         '0': {

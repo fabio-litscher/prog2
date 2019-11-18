@@ -1,3 +1,5 @@
+import os
+from pathlib import Path
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -8,6 +10,12 @@ import time
 from libs import data
 
 app = Flask("chaosbox")
+app_main_path = Path(os.path.abspath("/".join(os.path.realpath(__file__).split("/")[:-1])))
+#data_path = Path(os.path.abspath(app_main_path / ".." / "data"))
+data_path = Path(os.path.abspath(app_main_path / "data"))
+# app.secret_key = 'the random string'
+data_storage_file = data_path / "chaosbox.json"
+
 
 # initialize boxes
 # boxes = OrderedDict()
@@ -26,7 +34,6 @@ def home():
 @app.route('/box/<box_id>', methods=['GET', 'POST'])
 def box(box_id=None):
     if request.method == 'POST':
-
         # add box to boxes
         # set time in ms as box_id
         box_id = str(int(round(time.time() * 1000)))
@@ -37,6 +44,8 @@ def box(box_id=None):
             'box_description': box_description,
             'box_items': {}
         }
+
+        data.save_json(data_storage_file, boxes)
 
         return redirect(url_for('home'))
 
@@ -55,14 +64,13 @@ def box(box_id=None):
 def item(box_id=None, item_id=None):
     # post request from adding new item
     if request.method == 'POST':
-
         # add box to boxes
         key_list = list(boxes[box_id]['box_items'].keys())
         if len(key_list) != 0:
-            next_key = str(int(key_list[-1])+1)
+            next_key = str(int(key_list[-1]) + 1)
         else:
             next_key = '0'
-        
+
         item_name = request.form['item_name']
         item_description = request.form['item_description']
         item_quantity = request.form['item_quantity']
