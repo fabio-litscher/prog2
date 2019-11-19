@@ -1,0 +1,16 @@
+{% include "html_head.html" %}
+<body>
+	{% include "header_nav.html" %}
+	<main>
+		<a href="{{ url_for('box', box_id=box_id) }}">back to box</a>
+		<br />
+		<form method="post">
+			<h3>Sind sie sicher dass sie die folgende Box mit all ihren Items löschen möchten?</h3>
+			<h4>ID: {{ box_id }}</h4>
+			<h4>Name: {{ box['box_name'] }}</h4>
+			<h4>Description: {{ box['box_description'] }}</h4>
+
+			<input type="submit" name="box_delete" value="Löschen">
+		</form>
+	</main>
+</body>

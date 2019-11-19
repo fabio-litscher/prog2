@@ -53,11 +53,31 @@ def box(box_id=None):
     # show details
     if(box_id):
         box = boxes[box_id]
-        box_name = boxes[box_id]['box_name']
-        box_description = boxes[box_id]['box_description']
+        #box_name = boxes[box_id]['box_name']
+        #box_description = boxes[box_id]['box_description']
         return render_template('box.html', box_id=box_id, box=box)
 
+    # delete box
+    """if(delete_box_id):
+        print(delete_box_id)"""
+        #boxes.pop(delete_box_id, None)
+
     return render_template('box.html')
+
+
+@app.route('/box/delete/<box_id>', methods=['GET', 'POST'])
+def delete_box(box_id=None):
+    if request.method == 'POST':
+        boxes.pop(box_id, None)
+
+        return redirect(url_for('home'))
+
+    # show details
+    if(box_id):
+        box = boxes[box_id]
+        return render_template('delete_box.html', box_id=box_id, box=box)
+
+    return render_template('index.html')
 
 
 @app.route('/box/<box_id>/item', methods=['GET', 'POST'])
@@ -80,6 +100,8 @@ def item(box_id=None, item_id=None):
             'item_description': item_description,
             'item_quantity': item_quantity
         }
+
+        data.save_json(data_storage_file, boxes)
 
         return redirect(url_for('box', box_id=box_id))
 
