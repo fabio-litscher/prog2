@@ -26,11 +26,11 @@
 			{% endif %}
 		{% else %}
 			<form method="post">
-				<input type="text" name="box_name" placeholder="box name" />
+				<input type="text" name="box_name" placeholder="box name" required />
 				<br />
-				<textarea name="box_description" placeholder="box description"></textarea>
+				<textarea name="box_description" placeholder="box description" required></textarea>
 				<br />
-				<input type="submit" name="box_save" value="save">
+				<input class="btn-default" type="submit" name="box_save" value="save">
 			</form>
 		{% endif %}
 	</main>

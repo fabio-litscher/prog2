@@ -16,13 +16,13 @@
 
 		{% else %}
 			<form method="post">
-				<input type="text" name="item_name" placeholder="item name" />
+				<input type="text" name="item_name" placeholder="item name" required />
 				<br />
 				<input type="number" name="item_quantity" placeholder="item quantity" />
 				<br />
-				<textarea name="item_description" placeholder="item description"></textarea>
+				<textarea name="item_description" placeholder="item description" required></textarea>
 				<br />
-				<input type="submit" name="item_save" value="save">
+				<input class="btn-default" type="submit" name="item_save" value="save">
 			</form>
 		{% endif %}
 	</main>

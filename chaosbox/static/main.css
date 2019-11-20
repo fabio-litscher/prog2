@@ -20,7 +20,7 @@ main section {
 	width: 50%;
 }
 
-a.btn-default {
+.btn-default {
 	text-decoration: none;
 	padding: 10px;
 	margin-bottom: 10px;
@@ -30,9 +30,11 @@ a.btn-default {
 	background-color: darkblue;
 	display: inline-block;
 	transition: 0.5s ease;
+	border: none;
 	border-radius: 5px;
+	cursor: pointer;
 }
-a.btn-default:hover {
+.btn-default:hover {
 	transform: scale(0.95);
 }
 .bg-red {
