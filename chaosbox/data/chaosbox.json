@@ -1,28 +1,18 @@
 {
-    "1": {
-        "box_name": "Testbox 1",
-        "box_description": "Dies ist die erste Testbox.",
+    "1574231273391": {
+        "box_name": "asd",
+        "box_description": "asd",
         "box_items": {
             "0": {
-                "item_name": "drittes Item",
-                "item_description": "beschreibung des dritten items",
-                "item_quantity": 200
+                "item_name": "asd",
+                "item_description": "asd",
+                "item_quantity": ""
             },
             "1": {
-                "item_name": "viertes Item",
-                "item_description": "beschreibung des vierten items",
-                "item_quantity": 10
-            },
-            "2": {
-                "item_name": "",
-                "item_description": "",
-                "item_quantity": ""
+                "item_name": "test item",
+                "item_description": "asdad",
+                "item_quantity": "13323"
             }
         }
-    },
-    "1574087399026": {
-        "box_name": "aaaaaa",
-        "box_description": "a",
-        "box_items": {}
     }
 }
