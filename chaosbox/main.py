@@ -18,7 +18,6 @@ data_storage_file = data_path / "chaosbox.json"
 
 
 # initialize boxes
-# boxes = OrderedDict()
 boxes = {}
 
 # get dummy data
@@ -29,6 +28,7 @@ boxes = data.load_json(data_storage_file)
 @app.route('/')
 def home():
     return render_template('index.html', boxes=boxes)
+
 
 
 @app.route('/box', methods=['GET', 'POST'])
@@ -53,22 +53,18 @@ def box(box_id=None):
     # show details
     if(box_id):
         box = boxes[box_id]
-        #box_name = boxes[box_id]['box_name']
-        #box_description = boxes[box_id]['box_description']
         return render_template('box.html', box_id=box_id, box=box)
 
-    # delete box
-    """if(delete_box_id):
-        print(delete_box_id)"""
-        #boxes.pop(delete_box_id, None)
-
     return render_template('box.html')
+
 
 
 @app.route('/box/delete/<box_id>', methods=['GET', 'POST'])
 def delete_box(box_id=None):
     if request.method == 'POST':
         boxes.pop(box_id, None)
+
+        data.save_json(data_storage_file, boxes)
 
         return redirect(url_for('home'))
 
@@ -78,6 +74,7 @@ def delete_box(box_id=None):
         return render_template('delete_box.html', box_id=box_id, box=box)
 
     return render_template('index.html')
+
 
 
 @app.route('/box/<box_id>/item', methods=['GET', 'POST'])
@@ -108,9 +105,7 @@ def item(box_id=None, item_id=None):
     # show existing item
     if(item_id):
         item = boxes[box_id]['box_items'][item_id]
-        item_name = boxes[box_id]['box_items'][item_id]['item_name']
-        item_description = boxes[box_id]['box_items'][item_id]['item_description']
-        item_quantity = boxes[box_id]['box_items'][item_id]['item_quantity']
+
         return render_template('item.html', box_id=box_id, item_id=item_id, item=item)
 
     # when going to create a new item (empty item page)

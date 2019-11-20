@@ -35,6 +35,9 @@ a.btn-default {
 a.btn-default:hover {
 	transform: scale(0.95);
 }
+.bg-red {
+	background-color: red !important;
+}
 
 #search-form {
 	display: flex;
@@ -68,4 +71,7 @@ ul.default-list li:hover {
 ul.default-list li a:hover {
 	/*color: white;*/
 	color: black;
+}
+ul.default-list span.details-text {
+	float: right; margin-right: 30px;
 }

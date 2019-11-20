@@ -2,19 +2,19 @@
 <body>
 	{% include "header_nav.html" %}
 	<main>
-		<a href="{{ url_for('home')}}">back to list</a>
+		<a class="btn-default" href="{{ url_for('home')}}">back to list</a>
 
 		{% if box_id %}
 			<h2>Box Details</h2>
 
-			<a href="">edit box informations</a> |	 
-			<a href="{{ url_for('delete_box', box_id=box_id)}}">delete box with all items</a>
+			<a class="btn-default" href="">edit box informations</a>
+			<a class="btn-default bg-red" href="{{ url_for('delete_box', box_id=box_id)}}">delete box with all items</a>
 
 			<h4>ID: {{ box_id }}</h4>
 			<h4>Name: {{ box['box_name'] }}</h4>
 			<h4>Description: {{ box['box_description'] }}</h4>
 
-			<a href="{{ url_for('item', box_id=box_id)}}">create item</a>
+			<a class="btn-default" href="{{ url_for('item', box_id=box_id)}}">create item</a>
 			<h2>Items</h2>
 			{% if box['box_items'] %}
 			{% for item, data in box['box_items'].items() %}

@@ -2,12 +2,12 @@
 <body>
 	{% include "header_nav.html" %}
 	<main>
-		<a href="{{ url_for('box', box_id=box_id) }}">back to box</a>
+		<a class="btn-default" href="{{ url_for('box', box_id=box_id) }}">back to box</a>
 		{% if item_id %}
 			<h2>Item Details</h2>
 
-			<a href="">edit item</a>
-			<a href="">delete item</a>
+			<a class="btn-default" href="">edit item</a>
+			<a class="btn-default bg-red" href="">delete item</a>
 
 			<h4>ID: {{ item_id }}</h4>
 			<h4>Name: {{ item['item_name'] }}</h4>
