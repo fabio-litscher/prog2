@@ -1,0 +1,17 @@
+{% include "html_head.html" %}
+<body>
+	{% include "header_nav.html" %}
+	<main>
+		<a class="btn-default" href="{{ url_for('item', box_id=box_id, item_id=item_id) }}">back to item</a>
+		<br />
+		<form method="post">
+			<h3>Sind sie sicher dass sie das folgende Item mit allen Attributen löschen möchten?</h3>
+			<h4>ID: {{ item_id }}</h4>
+			<h4>Name: {{ item['item_name'] }}</h4>
+			<h4>Description: {{ item['item_description'] }}</h4>
+			<h4>Quantity: {{ item['item_quantity'] }}</h4>
+
+			<input class="btn-default bg-red" type="submit" name="box_delete" value="delete">
+		</form>
+	</main>
+</body>

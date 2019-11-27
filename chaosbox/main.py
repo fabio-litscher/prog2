@@ -112,5 +112,23 @@ def item(box_id=None, item_id=None):
     return render_template('item.html', box_id=box_id)
 
 
+@app.route('/box/delete/<box_id>/<item_id>', methods=['GET', 'POST'])
+def delete_item(box_id=None, item_id=None):
+    if request.method == 'POST':
+        #boxes.pop(box_id, None)
+
+        #data.save_json(data_storage_file, boxes)
+
+        return "post"
+        #return redirect(url_for('home'))
+
+    # show details
+    if(box_id and item_id):
+        item = boxes[box_id]['box_items'][item_id]
+        return render_template('delete_item.html', box_id=box_id, item_id=item_id, item=item)
+
+    return render_template('index.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

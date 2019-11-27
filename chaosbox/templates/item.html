@@ -7,7 +7,7 @@
 			<h2>Item Details</h2>
 
 			<a class="btn-default" href="">edit item</a>
-			<a class="btn-default bg-red" href="">delete item</a>
+			<a class="btn-default bg-red" href="{{ url_for('delete_item', box_id=box_id, item_id=item_id)}}">delete item</a>
 
 			<h4>ID: {{ item_id }}</h4>
 			<h4>Name: {{ item['item_name'] }}</h4>
