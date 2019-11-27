@@ -115,12 +115,11 @@ def item(box_id=None, item_id=None):
 @app.route('/box/delete/<box_id>/<item_id>', methods=['GET', 'POST'])
 def delete_item(box_id=None, item_id=None):
     if request.method == 'POST':
-        #boxes.pop(box_id, None)
+        boxes[box_id]['box_items'].pop(item_id, None)
 
-        #data.save_json(data_storage_file, boxes)
+        data.save_json(data_storage_file, boxes)
 
-        return "post"
-        #return redirect(url_for('home'))
+        return redirect(url_for('box', box_id=box_id))
 
     # show details
     if(box_id and item_id):
