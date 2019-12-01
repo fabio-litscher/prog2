@@ -2,36 +2,43 @@
 <body>
 	{% include "header_nav.html" %}
 	<main>
-		<a class="btn-default" href="{{ url_for('home')}}">back to list</a>
+		<section>
+			<a class="btn-default" href="{{ url_for('home')}}">back to list</a>
 
-		{% if box_id %}
-			<h2>Box Details</h2>
+			{% if box_id %}
+				<h2>Box Details</h2>
 
-			<a class="btn-default" href="">edit box informations</a>
-			<a class="btn-default bg-red" href="{{ url_for('delete_box', box_id=box_id)}}">delete box with all items</a>
+				<a class="btn-default" href="">edit box informations</a>
+				<a class="btn-default bg-red" href="{{ url_for('delete_box', box_id=box_id)}}">delete box with all items</a>
 
-			<h4>ID: {{ box_id }}</h4>
-			<h4>Name: {{ box['box_name'] }}</h4>
-			<h4>Description: {{ box['box_description'] }}</h4>
+				<h4>ID: {{ box_id }}</h4>
+				<h4>Name: {{ box['box_name'] }}</h4>
+				<h4>Description: {{ box['box_description'] }}</h4>
 
-			<a class="btn-default" href="{{ url_for('item', box_id=box_id)}}">create item</a>
-			<h2>Items</h2>
-			{% if box['box_items'] %}
-			{% for item, data in box['box_items'].items() %}
-				<a href="{{ url_for('item', box_id=box_id, item_id=item) }}">item {{ item }}:</a><br />
-				<span>{{ data['item_name'] }}</span><br />
-				<span>{{ data['item_description'] }}</span><br />
-				<span>{{ data['item_quantity'] }}</span><br /><br />
-			{% endfor %}
+				<a class="btn-default" href="{{ url_for('item', box_id=box_id)}}">create item</a>
+				<h2>Items</h2>
+				<ul class="default-list">
+				{% if box['box_items'] %}
+				{% for item, data in box['box_items'].items() %}
+					<!--<a href="{{ url_for('item', box_id=box_id, item_id=item) }}">item {{ item }}:</a><br />
+					<span>{{ data['item_name'] }}</span><br />
+					<span>{{ data['item_description'] }}</span><br />
+					<span>{{ data['item_quantity'] }}</span><br /><br />-->
+					<li>
+						<a href="{{ url_for('item', box_id=box_id, item_id=item) }}">item {{ item }}, Name: {{ data['item_name'] }}<span class="details-text">DETAILS</span></a>
+					</li>
+				{% endfor %}
+				{% endif %}
+				</ul>
+			{% else %}
+				<form method="post">
+					<input type="text" name="box_name" placeholder="box name" required />
+					<br />
+					<textarea name="box_description" placeholder="box description" required></textarea>
+					<br />
+					<input class="btn-default" type="submit" name="box_save" value="save">
+				</form>
 			{% endif %}
-		{% else %}
-			<form method="post">
-				<input type="text" name="box_name" placeholder="box name" required />
-				<br />
-				<textarea name="box_description" placeholder="box description" required></textarea>
-				<br />
-				<input class="btn-default" type="submit" name="box_save" value="save">
-			</form>
-		{% endif %}
+		</section>
 	</main>
 </body>

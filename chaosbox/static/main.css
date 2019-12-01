@@ -67,7 +67,7 @@ ul.default-list li a {
 }
 ul.default-list li:hover {
 	color: black;
-	transform: scale(0.98);
+	transform: scale(0.99);
 	/*background-color: darkblue;*/
 }
 ul.default-list li a:hover {
