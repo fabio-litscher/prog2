@@ -20,10 +20,6 @@
 				<ul class="default-list">
 				{% if box['box_items'] %}
 				{% for item, data in box['box_items'].items() %}
-					<!--<a href="{{ url_for('item', box_id=box_id, item_id=item) }}">item {{ item }}:</a><br />
-					<span>{{ data['item_name'] }}</span><br />
-					<span>{{ data['item_description'] }}</span><br />
-					<span>{{ data['item_quantity'] }}</span><br /><br />-->
 					<li>
 						<a href="{{ url_for('item', box_id=box_id, item_id=item) }}">item {{ item }}, Name: {{ data['item_name'] }}<span class="details-text">DETAILS</span></a>
 					</li>

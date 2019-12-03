@@ -33,7 +33,8 @@ def home():
 
 @app.route('/box', methods=['GET', 'POST'])
 @app.route('/box/<box_id>', methods=['GET', 'POST'])
-def box(box_id=None):
+@app.route('/box/<box_id>/<edit_box>', methods=['GET', 'POST'])
+def box(box_id=None, edit_box=None):
     if request.method == 'POST':
         # add box to boxes
         # set time in ms as box_id
@@ -51,7 +52,7 @@ def box(box_id=None):
         return redirect(url_for('home'))
 
     # show details
-    if(box_id):
+    if box_id:
         box = boxes[box_id]
         return render_template('box.html', box_id=box_id, box=box)
 
@@ -69,7 +70,7 @@ def delete_box(box_id=None):
         return redirect(url_for('home'))
 
     # show details
-    if(box_id):
+    if box_id:
         box = boxes[box_id]
         return render_template('delete_box.html', box_id=box_id, box=box)
 
@@ -103,7 +104,7 @@ def item(box_id=None, item_id=None):
         return redirect(url_for('box', box_id=box_id))
 
     # show existing item
-    if(item_id):
+    if item_id:
         item = boxes[box_id]['box_items'][item_id]
 
         return render_template('item.html', box_id=box_id, item_id=item_id, item=item)
@@ -122,7 +123,7 @@ def delete_item(box_id=None, item_id=None):
         return redirect(url_for('box', box_id=box_id))
 
     # show details
-    if(box_id and item_id):
+    if box_id and item_id:
         item = boxes[box_id]['box_items'][item_id]
         return render_template('delete_item.html', box_id=box_id, item_id=item_id, item=item)
 
