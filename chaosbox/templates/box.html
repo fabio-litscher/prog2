@@ -5,10 +5,20 @@
 		<section>
 			<a class="btn-default" href="{{ url_for('home')}}">back to list</a>
 
-			{% if box_id %}
+			{% if edit_box_id %}
+				<form method="post">
+					<h4>ID: {{ edit_box_id }}</h4>
+					<input type="hidden" name="box_id" value="{{ edit_box_id }}">
+					<input type="text" name="box_name" placeholder="box name" value="{{ box['box_name'] }}" required />
+					<br />
+					<textarea name="box_description" placeholder="box description" required>{{ box['box_description'] }}</textarea>
+					<br />
+					<input class="btn-default" type="submit" name="box_save" value="save">
+				</form>
+			{% elif box_id %}
 				<h2>Box Details</h2>
 
-				<a class="btn-default" href="">edit box informations</a>
+				<a class="btn-default" href="{{ url_for('box', box_id=box_id, edit_box="edit") }}">edit box informations</a>
 				<a class="btn-default bg-red" href="{{ url_for('delete_box', box_id=box_id)}}">delete box with all items</a>
 
 				<h4>ID: {{ box_id }}</h4>

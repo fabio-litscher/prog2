@@ -10,7 +10,8 @@ import time
 from libs import data
 
 app = Flask("chaosbox")
-app_main_path = Path(os.path.abspath("/".join(os.path.realpath(__file__).split("/")[:-1])))
+app_main_path = Path(os.path.abspath(
+    "/".join(os.path.realpath(__file__).split("/")[:-1])))
 #data_path = Path(os.path.abspath(app_main_path / ".." / "data"))
 data_path = Path(os.path.abspath(app_main_path / "data"))
 # app.secret_key = 'the random string'
@@ -30,34 +31,48 @@ def home():
     return render_template('index.html', boxes=boxes)
 
 
-
 @app.route('/box', methods=['GET', 'POST'])
 @app.route('/box/<box_id>', methods=['GET', 'POST'])
 @app.route('/box/<box_id>/<edit_box>', methods=['GET', 'POST'])
 def box(box_id=None, edit_box=None):
     if request.method == 'POST':
-        # add box to boxes
-        # set time in ms as box_id
-        box_id = str(int(round(time.time() * 1000)))
         box_name = request.form['box_name']
         box_description = request.form['box_description']
-        boxes[box_id] = {
-            'box_name': box_name,
-            'box_description': box_description,
-            'box_items': {}
-        }
+
+        # when editbox set box_id ootherwise create new from timestamp in ms
+        if request.form['box_id']:
+            box_id = request.form['box_id']
+            boxes[box_id]['box_name'] = box_name
+            boxes[box_id]['box_description'] = box_description
+        else:
+            box_id = str(int(round(time.time() * 1000)))
+            boxes[box_id] = {
+                'box_name': box_name,
+                'box_description': box_description,
+                'box_items': {}
+            }
 
         data.save_json(data_storage_file, boxes)
 
-        return redirect(url_for('home'))
-
-    # show details
-    if box_id:
         box = boxes[box_id]
         return render_template('box.html', box_id=box_id, box=box)
 
-    return render_template('box.html')
+    if edit_box == "edit":
+        try:
+            box = boxes[box_id]
+            return render_template('box.html', edit_box_id=box_id, box=box)
+        except:
+            return redirect(url_for('home'))
 
+    # show details
+    if box_id:
+        try:
+            box = boxes[box_id]
+            return render_template('box.html', box_id=box_id, box=box)
+        except:
+            return redirect(url_for('home'))
+
+    return render_template('box.html')
 
 
 @app.route('/box/delete/<box_id>', methods=['GET', 'POST'])
@@ -75,7 +90,6 @@ def delete_box(box_id=None):
         return render_template('delete_box.html', box_id=box_id, box=box)
 
     return render_template('index.html')
-
 
 
 @app.route('/box/<box_id>/item', methods=['GET', 'POST'])
