@@ -40,7 +40,7 @@ def box(box_id=None, edit_box=None):
         box_description = request.form['box_description']
 
         # when editbox set box_id ootherwise create new from timestamp in ms
-        if request.form['box_id']:
+        if 'box_id' in request.form:
             box_id = request.form['box_id']
             boxes[box_id]['box_name'] = box_name
             boxes[box_id]['box_description'] = box_description

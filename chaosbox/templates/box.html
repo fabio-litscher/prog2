@@ -3,7 +3,6 @@
 	{% include "header_nav.html" %}
 	<main>
 		<section>
-
 			{% if edit_box_id %}
 				<a class="btn-default" href="{{ url_for('box', box_id=edit_box_id) }}">back to box</a>
 
@@ -41,7 +40,7 @@
 				</ul>
 			{% else %}
 				<a class="btn-default" href="{{ url_for('home')}}">back to list</a>
-				
+
 				<form method="post">
 					<input type="text" name="box_name" placeholder="box name" required />
 					<br />

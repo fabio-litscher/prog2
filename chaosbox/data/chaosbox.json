@@ -1,13 +1,12 @@
 {
-    "1574231273391": {
-        "box_name": "asd test teest",
-        "box_description": "asdasdadssa asd\r\nasd",
-        "box_items": {
-            "0": {
-                "item_name": "test item",
-                "item_description": "asdads",
-                "item_quantity": ""
-            }
-        }
+    "1575466078838": {
+        "box_name": "asdssss",
+        "box_description": "asd",
+        "box_items": {}
+    },
+    "1575466108736": {
+        "box_name": "richis box",
+        "box_description": "asdasd",
+        "box_items": {}
     }
 }
