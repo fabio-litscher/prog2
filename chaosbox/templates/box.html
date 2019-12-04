@@ -3,9 +3,10 @@
 	{% include "header_nav.html" %}
 	<main>
 		<section>
-			<a class="btn-default" href="{{ url_for('home')}}">back to list</a>
 
 			{% if edit_box_id %}
+				<a class="btn-default" href="{{ url_for('box', box_id=edit_box_id) }}">back to box</a>
+
 				<form method="post">
 					<h4>ID: {{ edit_box_id }}</h4>
 					<input type="hidden" name="box_id" value="{{ edit_box_id }}">
@@ -16,6 +17,8 @@
 					<input class="btn-default" type="submit" name="box_save" value="save">
 				</form>
 			{% elif box_id %}
+				<a class="btn-default" href="{{ url_for('home')}}">back to list</a>
+
 				<h2>Box Details</h2>
 
 				<a class="btn-default" href="{{ url_for('box', box_id=box_id, edit_box="edit") }}">edit box informations</a>
@@ -37,6 +40,8 @@
 				{% endif %}
 				</ul>
 			{% else %}
+				<a class="btn-default" href="{{ url_for('home')}}">back to list</a>
+				
 				<form method="post">
 					<input type="text" name="box_name" placeholder="box name" required />
 					<br />
