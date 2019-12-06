@@ -36,6 +36,8 @@
 						<a href="{{ url_for('item', box_id=box_id, item_id=item) }}">item {{ item }}, Name: {{ data['item_name'] }}<span class="details-text">DETAILS</span></a>
 					</li>
 				{% endfor %}
+				{% else %}
+					<h4>No items found.</h4>
 				{% endif %}
 				</ul>
 			{% else %}

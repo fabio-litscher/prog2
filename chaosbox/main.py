@@ -94,28 +94,50 @@ def delete_box(box_id=None):
 
 @app.route('/box/<box_id>/item', methods=['GET', 'POST'])
 @app.route('/box/<box_id>/item/<item_id>', methods=['GET', 'POST'])
-def item(box_id=None, item_id=None):
+@app.route('/box/<box_id>/item/<item_id>/<edit_item>', methods=['GET', 'POST'])
+def item(box_id=None, item_id=None, edit_item=None):
     # post request from adding new item
     if request.method == 'POST':
-        # add box to boxes
-        key_list = list(boxes[box_id]['box_items'].keys())
-        if len(key_list) != 0:
-            next_key = str(int(key_list[-1]) + 1)
-        else:
-            next_key = '0'
-
         item_name = request.form['item_name']
         item_description = request.form['item_description']
         item_quantity = request.form['item_quantity']
-        boxes[box_id]['box_items'][next_key] = {
-            'item_name': item_name,
-            'item_description': item_description,
-            'item_quantity': item_quantity
-        }
+
+        # when editbox set box_id ootherwise create new from timestamp in ms
+        if 'item_id' in request.form:
+            item_id = request.form['item_id']
+            boxes[box_id]['box_items'][item_id] = {
+                'item_name': item_name,
+                'item_description': item_description,
+                'item_quantity': item_quantity
+            }
+        else:
+            key_list = list(boxes[box_id]['box_items'].keys())
+            if len(key_list) != 0:
+                next_key = str(int(key_list[-1]) + 1)
+            else:
+                next_key = '0'
+                
+            boxes[box_id]['box_items'][next_key] = {
+                'item_name': item_name,
+                'item_description': item_description,
+                'item_quantity': item_quantity
+            }
+
+
+        """item_name = request.form['item_name']
+        item_description = request.form['item_description']
+        item_quantity = request.form['item_quantity']"""
 
         data.save_json(data_storage_file, boxes)
 
         return redirect(url_for('box', box_id=box_id))
+
+    if edit_item == "edit":
+        try:
+            item = boxes[box_id]['box_items'][item_id]
+            return render_template('item.html', box_id=box_id, edit_item_id=item_id, item=item)
+        except:
+            return redirect(url_for('home'))
 
     # show existing item
     if item_id:

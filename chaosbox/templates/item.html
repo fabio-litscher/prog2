@@ -2,11 +2,24 @@
 <body>
 	{% include "header_nav.html" %}
 	<main>
-		<a class="btn-default" href="{{ url_for('box', box_id=box_id) }}">back to box</a>
-		{% if item_id %}
+		{% if edit_item_id %}
+		<a class="btn-default" href="{{ url_for('box', item_id=edit_item_id) }}">back to item</a>
+			<form method="post">
+				<h4>ID: {{ edit_item_id }}</h4>
+				<input type="hidden" name="item_id" value="{{ edit_item_id }}">
+				<input type="text" name="item_name" placeholder="item name" value="{{ item['item_name'] }}" required />
+				<br />
+				<input type="number" name="item_quantity" placeholder="item quantity" value="{{ item['item_quantity'] }}" />
+				<br />
+				<textarea name="item_description" placeholder="item description" required>{{ item['item_description'] }}</textarea>
+				<br />
+				<input class="btn-default" type="submit" name="item_save" value="save">
+			</form>
+		{% elif item_id %}
+			<a class="btn-default" href="{{ url_for('box', box_id=box_id) }}">back to box</a>
 			<h2>Item Details</h2>
 
-			<a class="btn-default" href="">edit item</a>
+			<a class="btn-default" href="{{ url_for('item', box_id=box_id, item_id=item_id, edit_item="edit") }}">edit item</a>
 			<a class="btn-default bg-red" href="{{ url_for('delete_item', box_id=box_id, item_id=item_id)}}">delete item</a>
 
 			<h4>ID: {{ item_id }}</h4>
