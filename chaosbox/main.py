@@ -8,14 +8,15 @@ from flask import url_for
 # from collections import OrderedDict
 import time
 from libs import data
+from libs import stats
 
 app = Flask("chaosbox")
 app_main_path = Path(os.path.abspath(
     "/".join(os.path.realpath(__file__).split("/")[:-1])))
-#data_path = Path(os.path.abspath(app_main_path / ".." / "data"))
 data_path = Path(os.path.abspath(app_main_path / "data"))
 # app.secret_key = 'the random string'
-data_storage_file = data_path / "chaosbox.json"
+data_storage_file = data_path / "chaosbox_boxes.json"
+stats_storage_file = data_path / "chaosbox_stats.json"
 
 
 # initialize boxes
@@ -28,7 +29,8 @@ boxes = data.load_json(data_storage_file)
 
 @app.route('/')
 def home():
-    return render_template('index.html', boxes=boxes)
+    statistics = stats.calc_stats(boxes)
+    return render_template('index.html', boxes=boxes, statistics=statistics)
 
 
 @app.route('/box', methods=['GET', 'POST'])
@@ -116,7 +118,7 @@ def item(box_id=None, item_id=None, edit_item=None):
                 next_key = str(int(key_list[-1]) + 1)
             else:
                 next_key = '0'
-                
+
             boxes[box_id]['box_items'][next_key] = {
                 'item_name': item_name,
                 'item_description': item_description,

@@ -2,15 +2,13 @@
 
 	<body>
 		{% include "header_nav.html" %}
-		<main>
+		<main class="flex">
 			<section>
 				<h1>Search</h1>
 				<p>List of all boxes with search and filter.</p>
 
 				<a class="btn-default" href="{{ url_for('box', box_id=None)}}">create box</a>
-			</section>
 
-			<section>
 				<form id="search-form" name="search-form" method="get">
 					<input type="text" name="search-query" placeholder="Suchbegriff" />
 
@@ -37,6 +35,14 @@
 					<h3>No boxes found.</h3>
 				{% endif %}
 				</ul>
+			</section>
+
+			<section>
+				<h1>Dashboard</h1>
+				<p>some stats and facts</p>
+				{% for key, value in statistics.items() %}
+					{{ key }}: {{ value }}<br />
+				{% endfor %}
 			</section>
 		</main>
 	</body>

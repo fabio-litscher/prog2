@@ -20,13 +20,16 @@ header a {
 header a:hover {
 	transform: scale(0.95);
 }
-
 main {
 	padding: 20px;
 }
+main.flex {
+	display: flex;
+	justify-content: space-between;
+}
 
 main section {
-	width: 50%;
+	width: 48%;
 }
 
 .btn-default {
