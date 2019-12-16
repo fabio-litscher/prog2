@@ -20,7 +20,7 @@
 
 				<h2>Box Details</h2>
 
-				<a class="btn-default" href="{{ url_for('box', box_id=box_id, edit_box="edit") }}">edit box informations</a>
+				<a class="btn-default" href="{{ url_for('box', box_id=box_id, edit_box='edit') }}">edit box informations</a>
 				<a class="btn-default bg-red" href="{{ url_for('delete_box', box_id=box_id)}}">delete box with all items</a>
 
 				<h4>ID: {{ box_id }}</h4>
