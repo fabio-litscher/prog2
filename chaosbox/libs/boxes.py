@@ -11,3 +11,8 @@ def update_box(boxes, box_id, box_name, box_description):
     boxes[box_id]['box_name'] = box_name
     boxes[box_id]['box_description'] = box_description
     return boxes
+
+
+def delete_box(boxes, box_id):
+    boxes.pop(box_id)
+    return boxes

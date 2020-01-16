@@ -4,12 +4,11 @@
 		{% include "header_nav.html" %}
 		<main class="flex">
 			<section>
-				<h1>Search</h1>
-				<p>List of all boxes with search and filter.</p>
+				<!--<h1>Search</h1>
+				<p>List of all boxes with search and filter.</p>-->
 
-				<a class="btn-default" href="{{ url_for('box', box_id=None)}}">create box</a>
 
-				<form id="search-form" name="search-form" method="get">
+				<!--<form id="search-form" name="search-form" method="get">
 					<input type="text" name="search-query" placeholder="Suchbegriff" />
 
 					<input type="checkbox" id="search-boxes" name="search-boxes" />
@@ -19,9 +18,11 @@
 					<label for="search-items">Nach Item suchen</label>
 
 					<input class="btn-default" type="submit" name="execute-search" value="search" />
-				</form>
+				</form>-->
 
-				<h1>Ergebnisse</h1>
+				<h2>Boxes</h2>
+				<p>List of all boxes in the system.</p>
+				<a class="btn-default" href="{{ url_for('box', box_id=None)}}">create box</a>
 				<ul class="default-list">
 				{% if boxes %}
 
@@ -38,10 +39,10 @@
 			</section>
 
 			<section>
-				<h1>Dashboard</h1>
+				<h2>Dashboard</h2>
 				<p>some stats and facts</p>
 				{% for key, value in statistics.items() %}
-					{{ key }}: {{ value }}<br />
+					{{ key }}: {{ value|safe }}<br />
 				{% endfor %}
 			</section>
 		</main>
