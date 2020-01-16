@@ -3,20 +3,10 @@
         "box_name": "aaaaaa",
         "box_description": "asd",
         "box_items": {
-            "0": {
-                "item_name": "asd",
-                "item_description": "asd",
-                "item_quantity": ""
-            },
-            "1": {
-                "item_name": "asdad",
-                "item_description": "asdasd",
-                "item_quantity": ""
-            },
             "2": {
-                "item_name": "asdada",
-                "item_description": "asdad",
-                "item_quantity": ""
+                "item_name": "aaaaa",
+                "item_description": "asaaaaaa",
+                "item_quantity": "12123131"
             }
         }
     },
@@ -24,11 +14,6 @@
         "box_name": "richis box",
         "box_description": "asdasd",
         "box_items": {
-            "1": {
-                "item_name": "asdadaZZ",
-                "item_description": "afsd",
-                "item_quantity": "23412"
-            },
             "2": {
                 "item_name": "faaaa",
                 "item_description": "afaaaaa\r\n\r\nasdasd",

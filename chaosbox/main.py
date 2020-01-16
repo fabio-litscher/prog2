@@ -24,8 +24,7 @@ data_storage_file = data_path / "chaosbox_boxes.json"
 # initialize boxes
 boxes = {}
 
-# get dummy data_lib
-# boxes = data_lib.load_json(data_storage_file)
+# get dummy data for testing
 # boxes = data_lib.create_dummy_data_lib()
 
 
@@ -111,30 +110,14 @@ def item(box_id=None, item_id=None, edit_item=None):
         item_description = request.form['item_description']
         item_quantity = request.form['item_quantity']
 
-        # when editbox set box_id ootherwise create new from timestamp in ms
+        # when edit
         if 'item_id' in request.form:
             item_id = request.form['item_id']
-            boxes[box_id]['box_items'][item_id] = {
-                'item_name': item_name,
-                'item_description': item_description,
-                'item_quantity': item_quantity
-            }
+            boxes = item_lib.update_item(boxes, box_id, item_id, item_name, item_description, item_quantity)
+
+        # else new item
         else:
-            key_list = list(boxes[box_id]['box_items'].keys())
-            if len(key_list) != 0:
-                next_key = str(int(key_list[-1]) + 1)
-            else:
-                next_key = '0'
-
-            boxes[box_id]['box_items'][next_key] = {
-                'item_name': item_name,
-                'item_description': item_description,
-                'item_quantity': item_quantity
-            }
-
-        """item_name = request.form['item_name']
-        item_description = request.form['item_description']
-        item_quantity = request.form['item_quantity']"""
+            boxes = item_lib.add_item(boxes, box_id, item_name, item_description, item_quantity)
 
         data_lib.save_json(data_storage_file, boxes)
 
@@ -160,9 +143,9 @@ def item(box_id=None, item_id=None, edit_item=None):
 @app.route('/box/delete/<box_id>/<item_id>', methods=['GET', 'POST'])
 def delete_item(box_id=None, item_id=None):
     boxes = data_lib.load_json(data_storage_file)
-    
+
     if request.method == 'POST':
-        boxes[box_id]['box_items'].pop(item_id)
+        boxes = item_lib.delete_item(boxes, box_id, item_id)
 
         data_lib.save_json(data_storage_file, boxes)
 

@@ -28,6 +28,7 @@
 			<h4>Quantity: {{ item['item_quantity'] }}</h4>
 
 		{% else %}
+			<a class="btn-default" href="{{ url_for('box', box_id=box_id) }}">back to box</a>
 			<form method="post">
 				<input type="text" name="item_name" placeholder="item name" required />
 				<br />
