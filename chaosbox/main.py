@@ -1,3 +1,14 @@
+"""
+main.py from the chaosbox webapp
+all routes are handled in here
+
+Attributes:
+    app (flask.app.Flask): my app
+    app_main_path (str): main path of project, coming from os
+    data_path (str): path to the data folder which contains the JSON file
+    data_storage_file (str): complete path to the json file - data_path + filename
+"""
+
 import os
 from pathlib import Path
 from flask import Flask
@@ -29,6 +40,12 @@ boxes = {}
 
 @app.route('/')
 def home():
+    """
+    Route for the home page where the box overview and statistics are shown
+
+    Returns:
+        render_template: renders the index.html template with the boxes and statistics
+    """
     boxes = data_lib.load_json(data_storage_file)
     statistics = stats_lib.calc_stats(boxes)
     return render_template('index.html', boxes=boxes, statistics=statistics)
@@ -38,8 +55,26 @@ def home():
 @app.route('/box/<box_id>', methods=['GET', 'POST'])
 @app.route('/box/<box_id>/<edit_box>', methods=['GET', 'POST'])
 def box(box_id=None, edit_box=None):
+    """
+    Route for the box page which handles anything about boxes, following situations
+        (1): handling post request from adding or edit a box
+        (2): handling the edit box reuest
+        (3): showing box details
+        (4): showing form to add new box
+
+    Args:
+        box_id (str): box_id for edit or show details
+        edit_box (str): to know if edit button pressed
+
+    Returns:
+        (1) render_template: renders box.html template with box data to show details
+        (2) render_template/redirect: renders box.html template with details or redirects to home if a wrong param (box_id is given) 
+        (3) render_template/redirect: renders box.html template with details or redirects to home if a wrong param (box_id is given) 
+        (4) render_template: renders box.html template without any data - empty form is shown
+    """
     boxes = data_lib.load_json(data_storage_file)
 
+    # (1): handling post request from adding a new box or edit
     if request.method == 'POST':
         box_name = request.form['box_name']
         box_description = request.form['box_description']
@@ -59,7 +94,7 @@ def box(box_id=None, edit_box=None):
         box = boxes[box_id]
         return render_template('box.html', box_id=box_id, box=box)
 
-    # edit box
+    # (2): handling the edit box reuest
     if edit_box == "edit":
         try:
             box = boxes[box_id]
@@ -67,7 +102,7 @@ def box(box_id=None, edit_box=None):
         except():
             return redirect(url_for('home'))
 
-    # show details
+    # (3): showing box details
     if box_id:
         try:
             box = boxes[box_id]
@@ -75,6 +110,7 @@ def box(box_id=None, edit_box=None):
         except():
             return redirect(url_for('home'))
 
+    # (4): showing form to add new box
     return render_template('box.html')
 
 
@@ -101,9 +137,27 @@ def delete_box(box_id=None):
 @app.route('/box/<box_id>/item/<item_id>', methods=['GET', 'POST'])
 @app.route('/box/<box_id>/item/<item_id>/<edit_item>', methods=['GET', 'POST'])
 def item(box_id=None, item_id=None, edit_item=None):
+    """
+    Route for the box page which handles anything about items, following situations
+        (1): handling post request from adding or edit a item
+        (2): handling the edit item reuest
+        (3): showing item details
+        (4): showing form to add new item
+
+    Args:
+        box_id (str): box_id in which the item is
+        item_id (str): id of the item
+        edit_item (str): to know if edit button pressed
+
+    Returns:
+        (1) redirect: redirects to specific box overview in which the new or updated item is
+        (2) render_template/redirect: renders item.html template with details or redirects to home if a wrong param (box_id or item_id) 
+        (3) render_template: renders item.html template with details of item
+        (4) render_template: renders item.html template without any data - empty form is shown
+    """
     boxes = data_lib.load_json(data_storage_file)
 
-    # post request from adding new item
+    # (1): handling post request from adding or edit a item
     if request.method == 'POST':
         item_name = request.form['item_name']
         item_description = request.form['item_description']
@@ -112,16 +166,19 @@ def item(box_id=None, item_id=None, edit_item=None):
         # when edit
         if 'item_id' in request.form:
             item_id = request.form['item_id']
-            boxes = item_lib.update_item(boxes, box_id, item_id, item_name, item_description, item_quantity)
+            boxes = item_lib.update_item(
+                boxes, box_id, item_id, item_name, item_description, item_quantity)
 
         # else new item
         else:
-            boxes = item_lib.add_item(boxes, box_id, item_name, item_description, item_quantity)
+            boxes = item_lib.add_item(
+                boxes, box_id, item_name, item_description, item_quantity)
 
         data_lib.save_json(data_storage_file, boxes)
 
         return redirect(url_for('box', box_id=box_id))
 
+    # (2): handling the edit item reuest
     if edit_item == "edit":
         try:
             item = boxes[box_id]['box_items'][item_id]
@@ -129,13 +186,13 @@ def item(box_id=None, item_id=None, edit_item=None):
         except():
             return redirect(url_for('home'))
 
-    # show existing item
+    # (3): showing item details
     if item_id:
         item = boxes[box_id]['box_items'][item_id]
 
         return render_template('item.html', box_id=box_id, item_id=item_id, item=item)
 
-    # when going to create a new item (empty item page)
+    # (4): showing form to add new item
     return render_template('item.html', box_id=box_id)
 
 
