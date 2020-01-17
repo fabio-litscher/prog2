@@ -116,8 +116,21 @@ def box(box_id=None, edit_box=None):
 
 @app.route('/box/delete/<box_id>', methods=['GET', 'POST'])
 def delete_box(box_id=None):
+    """
+    Route to delete an existing box
+        (1): handle post request to delete box when clicked on yes on the 'are you sure you want to delete this box' page
+        (2): show the 'are you sure you want to delete this box' page
+
+    Args:
+        box_id (str): ID of the box to delete
+
+    Returns:
+        (1) redirect: redirect to home page with the overview of boxes after box is deleted
+        (2) render_template: render delete_box.html template to ask if they are sure to delete the box with all the items (with all the box informations to display)
+    """
     boxes = data_lib.load_json(data_storage_file)
 
+    # (1): handle post request to delete box when clicked on yes on the 'are you sure you want to delete this box' page
     if request.method == 'POST':
         boxes = box_lib.delete_box(boxes, box_id)
 
@@ -125,7 +138,7 @@ def delete_box(box_id=None):
 
         return redirect(url_for('home'))
 
-    # show details
+    # (2): show the 'are you sure you want to delete this box' page
     if box_id:
         box = boxes[box_id]
         return render_template('delete_box.html', box_id=box_id, box=box)
@@ -166,8 +179,7 @@ def item(box_id=None, item_id=None, edit_item=None):
         # when edit
         if 'item_id' in request.form:
             item_id = request.form['item_id']
-            boxes = item_lib.update_item(
-                boxes, box_id, item_id, item_name, item_description, item_quantity)
+            boxes = item_lib.update_item(boxes, box_id, item_id, item_name, item_description, item_quantity)
 
         # else new item
         else:
@@ -198,8 +210,22 @@ def item(box_id=None, item_id=None, edit_item=None):
 
 @app.route('/box/delete/<box_id>/<item_id>', methods=['GET', 'POST'])
 def delete_item(box_id=None, item_id=None):
+    """
+    Route to delete an existing item
+        (1): handle post request to delete item when clicked on yes on the 'are you sure you want to delete this item' page
+        (2): show the 'are you sure you want to delete this item' page
+
+    Args:
+        box_id (str): ID of the box in which the item to delete is
+        item_id (str): ID of the item to delete
+
+    Returns:
+        (1) redirect: redirect to box detail page with the overview of all items of the box
+        (2) render_template: render delete_item.html template to ask if they are sure to delete the item (with all the item informations to display)
+    """
     boxes = data_lib.load_json(data_storage_file)
 
+    # (1): handle post request to delete item when clicked on yes on the 'are you sure you want to delete this item' page
     if request.method == 'POST':
         boxes = item_lib.delete_item(boxes, box_id, item_id)
 
@@ -207,7 +233,7 @@ def delete_item(box_id=None, item_id=None):
 
         return redirect(url_for('box', box_id=box_id))
 
-    # show details
+    # (2): show the 'are you sure you want to delete this item' page
     if box_id and item_id:
         item = boxes[box_id]['box_items'][item_id]
         return render_template('delete_item.html', box_id=box_id, item_id=item_id, item=item)
