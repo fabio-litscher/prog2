@@ -1,6 +1,9 @@
-{% include "html_head.html" %}
+<!-- index page with overview of boxes and statistics dashboard -->
 
+<!-- include reusable part html_head.html -->
+{% include "html_head.html" %}
 	<body>
+		<!-- include reusable part header_nav.html -->
 		{% include "header_nav.html" %}
 		<main class="flex">
 			<section>
@@ -8,6 +11,7 @@
 				<p>List of all boxes in the system.</p>
 				<a class="btn-default" href="{{ url_for('box', box_id=None)}}">create box</a>
 				<ul class="default-list">
+				<!-- if boxes data are here iterate through all boxes and print each element as li element -->
 				{% if boxes %}
 
 					{% for box, data in boxes.items() %}
@@ -16,6 +20,7 @@
 						</li>
 					{% endfor %}
 
+				<!-- if no boxes are in the dict print that no boxes have been found -->
 				{% else %}
 					<h3>No boxes found.</h3>
 				{% endif %}
@@ -25,7 +30,9 @@
 			<section>
 				<h2>Dashboard</h2>
 				<p>some stats and facts</p>
+				<!-- iterate thorugh the statistics and print them with key value -->
 				{% for key, value in statistics.items() %}
+					<!-- |safe is important when printing the value that the html tag in the value is interpreted correctly (it's a link <a href=''></a>) -->
 					{{ key }}: {{ value|safe }}<br />
 				{% endfor %}
 			</section>

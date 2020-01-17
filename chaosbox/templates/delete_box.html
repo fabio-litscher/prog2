@@ -1,5 +1,9 @@
+<!-- page to ask if the user is sure to delete a box -->
+
+<!-- include reusable part html_head.html -->
 {% include "html_head.html" %}
 <body>
+	<!-- include reusable part header_nav.html -->
 	{% include "header_nav.html" %}
 	<main>
 		<a class="btn-default" href="{{ url_for('box', box_id=box_id) }}">back to box</a>

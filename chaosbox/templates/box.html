@@ -1,8 +1,13 @@
+<!-- template for adding/editing and showing box details -->
+
+<!-- include reusable part html_head.html -->
 {% include "html_head.html" %}
 <body>
+	<!-- include reusable part header_nav.html -->
 	{% include "header_nav.html" %}
 	<main>
 		<section>
+			<!-- if there is an id of a box to edit show the edit-form with prefilled inputs from the box data -->
 			{% if edit_box_id %}
 				<a class="btn-default" href="{{ url_for('box', box_id=edit_box_id) }}">back to box</a>
 
@@ -15,6 +20,8 @@
 					<br />
 					<input class="btn-default" type="submit" name="box_save" value="save">
 				</form>
+
+			<!-- else if there is an box id show the box details with a link to edit or delete the box with its items -->
 			{% elif box_id %}
 				<a class="btn-default" href="{{ url_for('home')}}">back to list</a>
 
@@ -30,16 +37,19 @@
 				<a class="btn-default" href="{{ url_for('item', box_id=box_id)}}">create item</a>
 				<h2>Items</h2>
 				<ul class="default-list">
+				<!-- if the box has box_items iterate through all of them and print them as a li element with a link to the item details page -->
 				{% if box['box_items'] %}
-				{% for item, data in box['box_items'].items() %}
-					<li>
-						<a href="{{ url_for('item', box_id=box_id, item_id=item) }}">item {{ item }}, Name: {{ data['item_name'] }}<span class="details-text">DETAILS</span></a>
-					</li>
-				{% endfor %}
+					{% for item, data in box['box_items'].items() %}
+						<li>
+							<a href="{{ url_for('item', box_id=box_id, item_id=item) }}">item {{ item }}, Name: {{ data['item_name'] }}<span class="details-text">DETAILS</span></a>
+						</li>
+					{% endfor %}
 				{% else %}
 					<h4>No items found.</h4>
 				{% endif %}
 				</ul>
+
+			<!-- else show the empty form to add a box -->
 			{% else %}
 				<a class="btn-default" href="{{ url_for('home')}}">back to list</a>
 

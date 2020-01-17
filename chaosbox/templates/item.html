@@ -1,7 +1,12 @@
+<!-- template for adding/editing and showing items -->
+
+<!-- include reusable part html_head.html -->
 {% include "html_head.html" %}
 <body>
+	<!-- include reusable part header_nav.html -->
 	{% include "header_nav.html" %}
 	<main>
+		<!-- if there is an id of an item to edit show the edit-form with prefilled inputs from the item data -->
 		{% if edit_item_id %}
 		<a class="btn-default" href="{{ url_for('box', item_id=edit_item_id) }}">back to item</a>
 			<form method="post">
@@ -15,6 +20,8 @@
 				<br />
 				<input class="btn-default" type="submit" name="item_save" value="save">
 			</form>
+			
+		<!-- else if there is an item id show the item details with a link to edit or delete the item -->
 		{% elif item_id %}
 			<a class="btn-default" href="{{ url_for('box', box_id=box_id) }}">back to box</a>
 			<h2>Item Details</h2>
@@ -27,6 +34,7 @@
 			<h4>Description: {{ item['item_description'] }}</h4>
 			<h4>Quantity: {{ item['item_quantity'] }}</h4>
 
+		<!-- else show the empty form to add an item -->
 		{% else %}
 			<a class="btn-default" href="{{ url_for('box', box_id=box_id) }}">back to box</a>
 			<form method="post">
