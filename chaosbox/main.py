@@ -18,7 +18,6 @@ app_main_path = Path(os.path.abspath(
     "/".join(os.path.realpath(__file__).split("/")[:-1])))
 data_path = Path(os.path.abspath(app_main_path / "data"))
 data_storage_file = data_path / "chaosbox_boxes.json"
-# stats_lib_storage_file = data_lib_path / "chaosbox_stats_lib.json"
 
 
 # initialize boxes

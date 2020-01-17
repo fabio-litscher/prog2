@@ -1,4 +1,18 @@
+"""
+stats.py is the lib in which everything regarding statistic calculation is handled
+next step would be to save the stats into a separate json file and create a history which could be visualized
+"""
+
 def calc_stats(boxes):
+    """
+    Calculates the relevant statistics for the dashboard
+
+    Args:
+        boxes (dict): all warehouse data to calc the stats
+
+    Returns:
+        stats (dict): All the stats in a dict which is ready to be shown
+    """
     count_boxes = len(boxes)
     count_items = 0
     max_items = 0
